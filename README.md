@@ -2,14 +2,14 @@
 Log4mql is a mql4 (MetaQuotes MetaTrader 4 Language) library for flexible logging to files and the terminal console. It is modeled after the Log4j Java library.
 
 # Usage in your code
-CLog4mql::getInstance().error(__FILE__, __LINE__, "Something unexpected happen");
+CLog4mql::getInstance().error(\_\_FILE\_\_ \_\_LINE\_\_, "Something unexpected happen");
 
   or (for more frequent usage)
 
 CLog4mql* logger = CLog4mql::getInstance();
-logger.error(__FILE__, __LINE__, "Something unexpected happen");
-logger.info(__FILE__, __LINE__, "Calcumation done");
-logger.debug(__FILE__, __LINE__, StringFormat("The result of %s is %d", string1, value1));
+logger.error(\_\_FILE\_\_ \_\_LINE\_\_, "Something unexpected happen");
+logger.info(\_\_FILE\_\_ \_\_LINE\_\_, "Calcumation done");
+logger.debug(\_\_FILE\_\_ \_\_LINE\_\_, StringFormat("The result of %s is %d", string1, value1));
 
 Dont forget at the end of your EA / Indicator / Script:
 CLog4mql::release();
