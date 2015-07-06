@@ -25,9 +25,9 @@ logger.release();
 You can configure the required log level for output in the configfile for each appending file and / or a global default.
 
 # Log Levels:
-TRACE
-DEBUG
-INFO
-WARN
-ERROR
-CRIT
+ * TRACE
+ * DEBUG
+ * INFO
+ * WARN
+ * ERROR
+ * CRIT
