@@ -22,7 +22,7 @@ CLog4mql::release();
 logger.release();
 </code></pre>
 
-## Directorys
+## Directories
 The directory for the log4mql.conf and the log4mql.log files
  * Normal mode: mt4datadir/Files/
  * Test mode: mt4datadir/tester/files/
