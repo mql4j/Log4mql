@@ -16,7 +16,9 @@ logger.debug(\_\_FILE\_\_, \_\_LINE\_\_, StringFormat("The result of %s is %d", 
 Dont forget at the end of your EA / Indicator / Script:
 <pre><code>
 CLog4mql::release();
+
   or
+
 logger.release();
 </code></pre>
 
