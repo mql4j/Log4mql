@@ -1,7 +1,7 @@
 # log4mql
 Log4mql is a mql4 (MetaQuotes MetaTrader 4 Language) library for flexible logging to files and the terminal console. It is modeled after the Log4j Java library.
 
-# Usage in your code
+## Usage in your code
 <pre><code>
 CLog4mql::getInstance().error(__FILE__, __LINE__, "Something unexpected happen");
 
@@ -22,9 +22,13 @@ CLog4mql::release();
 logger.release();
 </code></pre>
 
-You can configure the required log level for output in the configfile for each appending file and / or a global default.
+## Directorys
+The directory for the log4mql.conf and the log4mql.log files
+ * Normal mode: mt4datadir/Files/
+ * Test mode: mt4datadir/tester/files/
 
-# Log Levels:
+## Log Levels
+You can configure the required log level for output in the configfile for each appending file and / or a global default.
  * TRACE
  * DEBUG
  * INFO
