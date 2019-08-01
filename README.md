@@ -24,8 +24,8 @@ logger.release();
 
 ## Directories
 The directory for the log4mql.conf and the log4mql.log files
- * Normal mode: mt4datadir/Files/
- * Test mode: mt4datadir/tester/files/
+ * Normal mode: `<mt4-data-dir>/MQL4/Files/`
+ * Test mode: `<mt4-data-dir>/tester/files/`
 
 ## Log Levels
 You can configure the required log level for output in the configfile for each appending file and / or a global default.

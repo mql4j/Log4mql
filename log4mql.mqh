@@ -62,6 +62,7 @@
  */
 #define LOG4MQL_DEFAULT_LOGFILE				"log4mql.log"
 #define LOG4MQL_DEFAULT_LEVEL				4
+#define LOG4MQL_DEFAULT_LOG_TO_CONSOLE_WHEN_IN_TESTING true
 #define LOG4MQL_DEFAULT_ROTATE_ENABLE		true
 #define LOG4MQL_DEFAULT_ROTATE_CHECK_PERIOD	1000
 #define LOG4MQL_DEFAULT_ROTATE_SIZE_MB		1
@@ -77,6 +78,7 @@ private:
 	static CLog4mql *instance;
 	string confLogFile;
 	int confDefaultLevel;
+	bool confLogToConsoleWhenInTesting;
 	bool confRotateEnabled;
 	int confRotateCheckPeriod;
 	ulong confRotateSize;
@@ -94,6 +96,7 @@ protected:
 	CLog4mql() {
 		confLogFile = LOG4MQL_DEFAULT_LOGFILE;
 		confDefaultLevel = LOG4MQL_DEFAULT_LEVEL;
+		confLogToConsoleWhenInTesting = LOG4MQL_DEFAULT_LOG_TO_CONSOLE_WHEN_IN_TESTING;
 		confRotateEnabled = LOG4MQL_DEFAULT_ROTATE_ENABLE;
 		confRotateCheckPeriod = LOG4MQL_DEFAULT_ROTATE_CHECK_PERIOD;
 		confRotateSize = LOG4MQL_DEFAULT_ROTATE_SIZE_MB * 1024 * 1024;
@@ -275,7 +278,7 @@ private:
 		if(IsOptimization()) {
 			return;
 		}
-		if(!IsTesting()) {
+		if(!IsTesting() || confLogToConsoleWhenInTesting) {
 			logToConsole(level, file, line, msg);
 		}
 		logToFile(level, file, line, msg);
@@ -465,6 +468,9 @@ private:
 			} else if(key == "logfile") {
 				confLogFile = value;
 				debug(__FILE__, __LINE__, StringFormat("Config %-20s = %s", key, value));
+			} else if (key == "logToConsoleWhenInTesting") {
+				confLogToConsoleWhenInTesting = "true" == value;
+				debug(__FILE__, __LINE__, StringFormat("Config %-20s = %s", key, (confLogToConsoleWhenInTesting ? "ENABLED" : "DISABLED")));
 			} else if(key == "rotateEnable") {
 				if(value == "true") {
 					confRotateEnabled = true;
@@ -530,10 +536,10 @@ private:
 		}
 		string spl[];
 		StringSplit(line, StringGetCharacter("=", 0), spl);
-		string s = spl[col];
-		StringTrimLeft(s);
-		StringTrimRight(s);
-		return s;
+		string str = spl[col];
+		StringTrimLeft(str);
+		StringTrimRight(str);
+		return str;
 	}
 
 	/**
@@ -598,17 +604,17 @@ private:
 	 * @return int
 	 *		Log level
 	 */
-	int stringToLevel(string s) {
-		StringToUpper(s);
-		if(s == "TRACE") {
+	int stringToLevel(string str) {
+		StringToUpper(str);
+		if(str == "TRACE") {
 			return LOG4MQL_LEVEL_TRACE;
-		} else if(s == "DEBUG") {
+		} else if(str == "DEBUG") {
 			return LOG4MQL_LEVEL_DEBUG;
-		} else if(s == "WARN" || s == "WARNING") {
+		} else if(str == "WARN" || str == "WARNING") {
 			return LOG4MQL_LEVEL_WARN;
-		} else if(s == "ERROR") {
+		} else if(str == "ERROR") {
 			return LOG4MQL_LEVEL_ERROR;
-		} else if(s == "CRIT" || s == "CRITICAL") {
+		} else if(str == "CRIT" || str == "CRITICAL") {
 			return LOG4MQL_LEVEL_CRIT;
 		} else {
 			return confDefaultLevel;
