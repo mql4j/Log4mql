@@ -147,6 +147,14 @@ public:
 		instance = NULL;
 	}
 
+	static void setConfLogFile(string logFile)
+	{
+		if(instance!=NULL) {
+			instance.confLogFile=logFile;
+			instance.closeLogFile();
+		}
+	}
+
 public:
 	/**
 	 * Trace
