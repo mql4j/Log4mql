@@ -22,6 +22,13 @@ CLog4mql::release();
 logger.release();
 </code></pre>
 
+## Filename
+You can set dynamically the file name of log with:
+<pre><code>
+const string typeLog=(IsDemo()?"demo":"real";
+logger.setConfLogFile(StringFormat("log4mql-%s-%s.log",typeLog,Symbol()));
+</code></pre>
+
 ## Directories
 The directory for the log4mql.conf and the log4mql.log files
  * Normal mode: `<mt4-data-dir>/MQL4/Files/`
